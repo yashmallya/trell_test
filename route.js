@@ -38,51 +38,51 @@ route.post('/post',function(req,res,next){
 
 });
 
+// For multiple packages
+// route.post('/post',function(req,res,next){
+// 		var id = req.body.id;
+// 		var pkg =[]; 
+// 		var val =[];
+// 		for( var i =0;i<req.body.package.length;i++){
+// 			pkg.push(req.body.package[i]);
+// 		}
+// 		for( var i =0;i<pkg.length;i++)
+// 		{
+// 			val.push([id,pkg[i]]);
+// 		}
 
-route.post('/post',function(req,res,next){
-		var id = req.body.id;
-		var pkg =[]; 
-		var val =[];
-		for( var i =0;i<req.body.package.length;i++){
-			pkg.push(req.body.package[i]);
-		}
-		for( var i =0;i<pkg.length;i++)
-		{
-			val.push([id,pkg[i]]);
-		}
-
-		for( var i =0 ; i<val.length;i++)
-		{
+// 		for( var i =0 ; i<val.length;i++)
+// 		{
 			
-			var ID = val[i][0];
-			var pack = val[i][1];
-			console.log(ID,pack);
-			var temp = "select * from userAppPackage where id = '"+ID+"' and package = '"+pack+"' ";
+// 			var ID = val[i][0];
+// 			var pack = val[i][1];
+// 			console.log(ID,pack);
+// 			var temp = "select * from userAppPackage where id = '"+ID+"' and package = '"+pack+"' ";
 
-			db.query(temp,(error,result,field)=>{
+// 			db.query(temp,(error,result,field)=>{
 				
-				if(result == "")
-				{
-					var t = [];
-					t.push([ID,pack]);
-					var sql = 'INSERT INTO 	userAppPackage(id,package) VALUES ? ';
-					db.query(sql, [t], (err,reslt,fld)=>{})
-					// res.send({"do":"add"});
+// 				if(result == "")
+// 				{
+// 					var t = [];
+// 					t.push([ID,pack]);
+// 					var sql = 'INSERT INTO 	userAppPackage(id,package) VALUES ? ';
+// 					db.query(sql, [t], (err,reslt,fld)=>{})
+// 					// res.send({"do":"add"});
 
-					db.query("select * from appPackageTest where package = '"+pack+"'", (err,ans,field_1)=>{
-						if(ans == ""){
-							var sql = "INSERT INTO 	appPackageTest(package) VALUES('"+pack+"') ";
-							db.query(sql, (err_,reslt_,fld_)=>{})
-						}
-					})
-				}
-				else
-				{
-					res.send({"do":"nothing"});
-				}		
-			})
-		}		
-});
+// 					db.query("select * from appPackageTest where package = '"+pack+"'", (err,ans,field_1)=>{
+// 						if(ans == ""){
+// 							var sql = "INSERT INTO 	appPackageTest(package) VALUES('"+pack+"') ";
+// 							db.query(sql, (err_,reslt_,fld_)=>{})
+// 						}
+// 					})
+// 				}
+// 				else
+// 				{
+// 					res.send({"do":"nothing"});
+// 				}		
+// 			})
+// 		}		
+// });
 
 route.get('/get',function(req,res,next){
 	var sql = 'select *from userAppPackage ';
